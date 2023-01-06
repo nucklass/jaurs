@@ -1,9 +1,25 @@
 module jaurs
 
-using Comonicon
+using Comonicon, HTTP, JSON3
 
-@cast mycmd1(arg; option="Sam") = println("cmd1: arg=", arg, "option=", option)
-@cast mycmd2(arg; option="Sam") = println("cmd2: arg=", arg, "option=", option)
+"""
+A simple command to search the Archlinux User Repository
 
-@main
+# Args
+- `searchword`: key term to use in search of aur
+
+"""
+@main function main(searchword)
+    resp = HTTP.get("https://aur.archlinux.org/rpc/v5/search/$searchword")
+    results = resp.body |>
+        JSON3.read |>
+        λ -> λ[:results] .|>
+        λ -> λ["Name"]
+    if isempty(results)
+        println("No Results Found :'(")
+    else
+        results .|> λ -> println(λ)
+end 
+    return results
+end 
 end
