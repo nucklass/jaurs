@@ -4,6 +4,6 @@ A [[https://github.com/comonicon/Comonicon.jl][Comonicon]]-based method to searc
 0. Install Julia
 1. Clone this Repo
 2. Enter Project directory
-3. run ~pkg> build~ to install the binary into your ~~/.julia/bin~ directory
+3. run ~pkg> build~ to install the binary into your =~/.julia/bin= directory
 ** Usage
 Once installed, try ~jaurs -h~ for help
